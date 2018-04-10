@@ -223,7 +223,61 @@ def mayusculas(palabra):
 
 """Escribe una funcion inicioFinVocal(palabra) que determina si una palabra empieza y acaba con una vocal"""
 def inicioFinVocal(palabra):
-    
+    if re.match("(a|e|i|o|u)", palabra[0].lower()) and re.match("(a|e|i|o|u)", palabra[-1].lower()):
+        return True
+    else :
+        return False
+
+"""Escribe una funcion eliminaVocales(palabra) que elimine todas las vocales que aparecen en la palabra"""
+def eliminaVocales(palabra):
+    nuevaPalabra = ""
+    for x in palabra:
+        if not re.match("(a|e|i|o|u)", x):
+            nuevaPalabra += x
+
+    return nuevaPalabra
+
+"""Escribe una funcion esInversa(palabra1, palabra2) que determina si una palabra es la misma que la otra pero con los caracteres en orden inverso"""
+def esInversa(palabra1, palabra2):
+    if palabra1[::-1] == palabra2:
+        return True
+    else:
+        return False
+
+"""Escribe una funcion que devuelva la transcripcion mRNA dada una secuencia DNA"""
+def transcripcion_mRNA(cadena):
+    nuevaCadena = ""
+    for x in cadena:
+        if x == "A":
+            nuevaCadena += "U"
+        elif x == "T":
+            nuevaCadena += "A"
+        elif x == "C":
+            nuevaCadena += "G"
+        else:
+            nuevaCadena += "C"
+
+    return nuevaCadena
+
+"""Escribe una funcion contarLetras(palabra) al que se le pasa una palabra y devuelve un diccionario que cuenta el numero de veces que aparece cada letra"""
+def contarLetrasDiccionario(palabra):
+    letras = []
+    cantidad = []
+    contadas = []
+    for x in palabra:
+        if x not in contadas:
+            contadas.append(x)
+            letras.append(x)
+            cantidad.append(palabra.count(x))
+    diccionario = dict(zip(letras, cantidad))
+
+    return diccionario
+
+"""Escribe una funcion invertirDiccionario(d) al que se le pasa un diccionario y devuelve un diccionario que invierte claves y valores"""
+def invertirDiccionario(d):
+    diccionarioInvertido = {}
+
+    return diccionarioInvertido
 
 
 
@@ -257,3 +311,8 @@ if __name__ == "__main__":
     print(numVocales("telefono"))
     print(vocales("telefono"))
     print(mayusculas("telefono"))
+    print(inicioFinVocal("casa"))
+    print(eliminaVocales("telefono"))
+    print(esInversa("casa", "asac"))
+    print(transcripcion_mRNA("ATCGATTG"))
+    print(contarLetrasDiccionario("telefono"))
