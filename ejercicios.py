@@ -244,6 +244,108 @@ def esInversa(palabra1, palabra2):
     else:
         return False
 
+"""Escribe una funcion comunes(palabra1, palabra2) que devuelva una cadena formada por los caracteres comunes a las dos palabras"""
+def comunes(palabra1, palabra2):
+    cadena = ""
+    for x in palabra1:
+        if x in palabra2:
+            cadena += x
+
+    return cadena
+
+"""Escribe una funcion ecoPalabra(palabra) que devuelva una cadena formada por palabra repetida tantas veces como sea su longitud"""
+def ecoPalabra(palabra):
+    return palabra * len(palabra)
+
+"""Escribe una funcion palindromo(frase) que determine si frase es un palindromo"""
+def palindromo(frase):
+    if frase == frase[::-1]:
+        return True
+    else:
+        return False
+
+"""Escribe una funcion ordenAlfabetico(palabra) que determine si las letras que forman palabra aparecen en orden alfabetico"""
+def ordenAlfabetico(palabra):
+    orden = False
+    for x in range(len(palabra)):
+        if palabra[x - 1] < palabra[x]:
+            orden = True
+        else:
+            orden = False
+
+    return orden
+
+"""Escribe una funcion todasLasLetras(palabra, letras) que determine si todos los caracteres de letras en palabra"""
+def todasLasLetras(palabra, letras):
+    usados = True
+    for x in letras:
+        if x in palabra and usados == True:
+            usados = True
+        else:
+            usados = False
+
+    return usados
+
+"""Escribe una funcion esTripleDoble(palabra) que determine si palabra tiene tres pares de letras consecutivos"""
+def esTripleDoble(palabra):
+    primerDoble = False
+    segundoDoble = False
+    tercerDoble = False
+    for x in range(len(palabra)):
+        if palabra[x - 1] == palabra[x]:
+            primerDoble = True
+            if primerDoble and palabra[x + 1] == palabra[x + 2]:
+                segundoDoble = True
+                if segundoDoble and palabra[x + 3] == palabra[x + 4]:
+                    tercerDoble = True
+
+    return tercerDoble
+
+"""Escribe una funcion trocear(palabra, num) que devuelva una lista con trozos de tamanio num de palabra"""
+def trocear(palabra, num):
+    listaTrozos = []
+    x = 0
+    while x < len(palabra):
+        listaTrozos.append(palabra[x:num + x])
+        x += num
+
+    return listaTrozos
+
+"""Escribe una funcion anagrama(palabra1, palabra2) que determine si es un anagrama"""
+def anagrama(palabra1, palabra2):
+    listaPalabra1 = []
+    listaPalabra2 = []
+    for x in palabra1:
+        listaPalabra1.append(x)
+
+    for x in palabra2:
+        listaPalabra2.append(x)
+
+    if sorted(listaPalabra1) == sorted(listaPalabra2):
+        return True
+    else:
+        return False
+
+"""Escribe una funcion pangrama(frase) que determine si frase es o no un pangrama"""
+def pangrama(frase):
+    frase = frase.lower()
+    
+    abecedario = [chr(i) for i in range(97,123)]
+    
+    for i in abecedario:
+        if i not in frase:
+            return False
+    
+    return True
+
+"""Escribe una funcion sumaDigitos(numero) que haga la suma de los digitos de un numero"""
+def sumaDigitos(numero):
+    resultado = 0
+    for x in str(numero):
+        resultado += int(x)
+
+    return resultado
+
 """Escribe una funcion que devuelva la transcripcion mRNA dada una secuencia DNA"""
 def transcripcion_mRNA(cadena):
     nuevaCadena = ""
@@ -275,10 +377,31 @@ def contarLetrasDiccionario(palabra):
 
 """Escribe una funcion invertirDiccionario(d) al que se le pasa un diccionario y devuelve un diccionario que invierte claves y valores"""
 def invertirDiccionario(d):
-    diccionarioInvertido = {}
+    return dict((v, k) for (k, v) in d.items())
 
-    return diccionarioInvertido
+"""Escribe una funcion que convierta una lista representando un vector disperso en un diccionario"""
+def convertirVector(lista):
+    valores = []
+    posiciones = []
+    for x in range(len(lista)):
+        if lista[x] is not 0:
+            valores.append(lista[x])
+            posiciones.append(x)
 
+    diccionario = dict(zip(posiciones, valores))
+
+    return diccionario
+
+"""Escribe una funcion que realice la conversion inversa a la realizada en el ejercicio anterior"""
+def convertirDiccionario(diccionario):
+    lista = []
+    valores = []
+    for key in sorted(diccionario.keys()):
+        while key > len(lista):
+            lista.append(0)
+        lista.append(diccionario[key])
+
+    return lista
 
 
 if __name__ == "__main__":
@@ -287,13 +410,17 @@ if __name__ == "__main__":
     terceraLista = [2,5,9,11,5,8,3]
     cuartaLista = [1,3,4,8,5,6,0]
     quintaLista = [12, 23, 11]
+    vectorDisperso = [1,0,0,2,0,0,0,3,0,0,0,0,4]
     matriz = [[1,2,2,3], [2,1,1,0]]
     listaCadenas = ["telefono", "coche", "mesa", "silla", "camiseta", "boligrafo"]
+    diccionario = {'Madrid' : 1, 'Barcelona' : 2, 'Granada' : 3}
+    dVectorDisperso = {0 : 1, 2 : 1, 4 : 2, 6 : 1, 9 : 1}
+    listaLetras = ["a", "e", "i", "o", "u"]
     print(numerosPares(lista))
     print(maximo(lista))
     print(dims(matriz))
     print(combinar(lista, segundaLista))
-    """print(traspuesta(matriz))"""
+    #print(traspuesta(matriz))
     print(factores_primos(237))
     print(sumaAcumulada(lista))
     print(combinarListas(lista, terceraLista))
@@ -302,7 +429,7 @@ if __name__ == "__main__":
     print(longs(listaCadenas))
     print(cadena_mas_larga(listaCadenas))
     print(cadena_mas_larga2(listaCadenas, 7))
-    """print(obtenerPotencias(cuartaLista))"""
+    #print(obtenerPotencias(cuartaLista))
     print(sumaPrimerDigito(quintaLista))
     print(mayoresMedia(cuartaLista))
     print(eliminarLetras("telefono", "e"))
@@ -314,5 +441,18 @@ if __name__ == "__main__":
     print(inicioFinVocal("casa"))
     print(eliminaVocales("telefono"))
     print(esInversa("casa", "asac"))
+    print(comunes("caballo", "gato"))
+    print(ecoPalabra("casa"))
+    print(palindromo("ana"))
+    print(ordenAlfabetico("casa"))
+    print(todasLasLetras("murcielago", listaLetras))
+    print(esTripleDoble("aassddasdasd"))
+    print(trocear("helicopteros", 2))
+    print(anagrama("casa", "saca"))
+    print(pangrama("me llamo jaime"))
+    print(sumaDigitos(123))
     print(transcripcion_mRNA("ATCGATTG"))
     print(contarLetrasDiccionario("telefono"))
+    print(invertirDiccionario(diccionario))
+    print(convertirVector(vectorDisperso))
+    print(convertirDiccionario(dVectorDisperso))
