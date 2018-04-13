@@ -37,14 +37,9 @@ def combinar(la, lb):
     lb.sort()
     return lb
 
-"""La traspuesta de una matriz se obtiene intercambiando filas y columnas. Escribe una funcion que devuelva la traspuesta de una matriz"""
+"""Escribe una funcion que devuelva la traspuesta de una matriz"""
 def traspuesta(matriz):
-    dimensiones = dims(matriz)
-    for x in range(dimensiones[0]):
-        for y in range(dimensiones[1]):
-            matrizTraspuesta[matriz[x]][matriz[y]]
-
-    return matrizTraspuesta
+    return [[matriz[j][i] for j in range(len(matriz))] for i in range(len(matriz[0]))]
 
 """Escribe una funcion factores_primos(num) que devuelva una lista con la descomposicion en factores primos de num"""
 def factores_primos(num):
@@ -82,10 +77,7 @@ def combinarListas(l1, l2):
 
 """Escribe una funcion eliminar(l1, l2) que dadas dos listas devuelva una lista en la que esten todos los elementos de l1 que no estan en l2"""
 def eliminar(l1, l2):
-    nuevaLista = []
-    for x in l1:
-        if x not in l2:
-            nuevaLista.append(x)
+    nuevaLista = [x for x in l1 if x not in l2]
 
     return nuevaLista
 
@@ -102,9 +94,7 @@ def contarLetras(palabra):
 
 """Escribe una funcion longs(cadenas) a la que le pasa una lista de cadenas y devuelve una lista con las longitudes de cada una de ellas"""
 def longs(cadenas):
-    lista = []
-    for x in cadenas:
-        lista.append(len(x))
+    lista = [len(x) for x in cadenas]
 
     return lista
 
@@ -134,7 +124,7 @@ def obtenerPotencias(numero):
     while cont >= 0 :
         listaPotencia.append(pow(cont, 2))
         
-        cont = cont - 1
+        cont -= 1
     
     listaPotencia += listaPotencia[len(listaPotencia)-2::-1]
 
@@ -313,13 +303,8 @@ def trocear(palabra, num):
 
 """Escribe una funcion anagrama(palabra1, palabra2) que determine si es un anagrama"""
 def anagrama(palabra1, palabra2):
-    listaPalabra1 = []
-    listaPalabra2 = []
-    for x in palabra1:
-        listaPalabra1.append(x)
-
-    for x in palabra2:
-        listaPalabra2.append(x)
+    listaPalabra1 = [x for x in palabra1]
+    listaPalabra2 = [x for x in palabra2]
 
     if sorted(listaPalabra1) == sorted(listaPalabra2):
         return True
@@ -345,6 +330,22 @@ def sumaDigitos(numero):
         resultado += int(x)
 
     return resultado
+
+"""Escribe una funcion a la que se le pase un string y devuelva su version encriptada con desplazamiento arbitrario"""
+def encriptar(cadena, desp):
+    cadenaEncriptada = ""
+    for x in cadena:
+        cadenaEncriptada += chr(ord(x) + desp)
+
+    return cadenaEncriptada
+
+"""Escribe una funcion a la que se le pase un string y devuelva su version desencriptada con desplazamiento arbitrario"""
+def desencriptar(cadenaEncriptada, desp):
+    cadena = ""
+    for x in cadenaEncriptada:
+        cadena += chr(ord(x) - desp)
+
+    return cadena
 
 """Escribe una funcion que devuelva la transcripcion mRNA dada una secuencia DNA"""
 def transcripcion_mRNA(cadena):
@@ -403,7 +404,6 @@ def convertirDiccionario(diccionario):
 
     return lista
 
-
 if __name__ == "__main__":
     lista = [1,2,3,4,5,6,7,8,9,10]
     segundaLista = [2,5,9,11,5,8,3]
@@ -420,7 +420,7 @@ if __name__ == "__main__":
     print(maximo(lista))
     print(dims(matriz))
     print(combinar(lista, segundaLista))
-    #print(traspuesta(matriz))
+    print(traspuesta(matriz))
     print(factores_primos(237))
     print(sumaAcumulada(lista))
     print(combinarListas(lista, terceraLista))
@@ -429,7 +429,7 @@ if __name__ == "__main__":
     print(longs(listaCadenas))
     print(cadena_mas_larga(listaCadenas))
     print(cadena_mas_larga2(listaCadenas, 7))
-    #print(obtenerPotencias(cuartaLista))
+    print(obtenerPotencias(40))
     print(sumaPrimerDigito(quintaLista))
     print(mayoresMedia(cuartaLista))
     print(eliminarLetras("telefono", "e"))
@@ -442,7 +442,7 @@ if __name__ == "__main__":
     print(eliminaVocales("telefono"))
     print(esInversa("casa", "asac"))
     print(comunes("caballo", "gato"))
-    print(ecoPalabra("casa"))
+    print(ecoPalabra("edificio"))
     print(palindromo("ana"))
     print(ordenAlfabetico("casa"))
     print(todasLasLetras("murcielago", listaLetras))
@@ -450,7 +450,9 @@ if __name__ == "__main__":
     print(trocear("helicopteros", 2))
     print(anagrama("casa", "saca"))
     print(pangrama("me llamo jaime"))
-    print(sumaDigitos(123))
+    print(sumaDigitos(5824))
+    print(encriptar("me llamo jaime", 13))
+    print(desencriptar(encriptar("me llamo jaime", 13), 13))
     print(transcripcion_mRNA("ATCGATTG"))
     print(contarLetrasDiccionario("telefono"))
     print(invertirDiccionario(diccionario))
